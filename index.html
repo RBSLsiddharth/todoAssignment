@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Todo assignment</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!--<script src="bootstrap.min.js"></script>
+   -->
+    <script>
+        function addinlist(text){
+
+            /* if(text=" "){
+             alert("enter some value in the field");
+             return false;
+             }*/
+            if(window.XMLHttpRequest){
+                xmlhttp = new XMLHttpRequest();
+            }else{
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+
+            }
+            xmlhttp.onreadystatechange=function(){
+                if(this.readyState==4&&this.status==200){
+                    //function body goes here
+
+                    $("#list").html(this.responseText);
+
+                }
+            }
+            xmlhttp.open("GET","ToDoAssignmentbyAjax.php?text="+text,true);
+            xmlhttp.send();
+
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h2>To-do list by AJAX </h2>
+    <form >
+        <div class="form-group">
+            <label for="box">ENTER THE TASK TO DO</label>
+            <input type="text" class="form-control" id="box" name="box" placeholder="Mention the task" required>
+            <input type="button" name="submit" id="submit" onclick=" return addinlist($('#box').val())"  class="button" placeholder="ADD" value="ADD">
+
+        </div>
+    </form>
+
+</div>
+
+<div class="container">
+    <ul  class="list-group">
+        <h1>Priority wise the list is as follows</h1>
+        <li id="list" class="list-group-item"><!--<span class="badge" ><a href="ToDoassignment.html?delete=<?php echo $taskid?>">X</a></span>--></li>
+
+    </ul>
+</div>
+<br/>
+<br/>
+<footer>
+    <div class="container text-center">
+        <p>Copyright &copy;MYBUILT @Sid</p>
+    </div>
+</footer>
+</body>
+</html>
